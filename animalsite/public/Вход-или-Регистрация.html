@@ -6,7 +6,8 @@
     <meta name="description" content="">
     <title>Вход или Регистрация</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Вход-или-Регистрация.css" media="screen">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Вход-или-Регистрация.css" media="screen">
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
@@ -78,7 +79,27 @@
         </div>
         <div class="u-palette-5-base u-preserve-proportions u-shape u-shape-circle u-shape-3"></div>
         <div class="u-align-left u-container-style u-group u-white u-group-1">
-          <div class="u-container-layout u-container-layout-1"></div>
+          <div class="u-container-layout u-container-layout-1">
+            <h2 style="font-family: sans-serif;">Вход</h2>
+            <form action="/login" method="POST">
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="pwd">Пароль:</label>
+                <input type="password" id="pwd" name="pwd" class="form-control">
+              </div>
+              <div class="form-group">
+                <a href="#">Забыли пароль?</a>
+              </div>
+              <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+            <div class="form-group">
+              <br/>
+              <a href="Регистрация.html">Регистрация</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -89,5 +110,7 @@
         <p class="u-small-text u-text u-text-variant u-text-1">Магазин товаров для домашних питомцев "У МЕНЯ ЛАПКИ"&nbsp;</p>
       </div></footer>
 
-  
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="./loginHandler.js"></script>
+
 </body></html>

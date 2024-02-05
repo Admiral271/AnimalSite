@@ -9,7 +9,13 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "faker": "^5.5.3",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.1",
+    "sequelize": "^6.35.2",
     "vue": "^3.2.13"
   },
   "devDependencies": {
@@ -17,7 +23,7 @@
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
+    "@vue/cli-service": "^3.3.1",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
   },

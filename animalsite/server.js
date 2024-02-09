@@ -8,6 +8,20 @@ const parser = require('./public/parser'); // Подключаем файл с �
 const registerRouter = require('./public/register'); // Подключаем файл с обработчиком регистрации
 const loginRouter = require('./public/login'); //Подключаем файл с обработчиком авторизации
 const profileRouter = require('./public/profile'); // Подключаем файл с обработчиком профиля
+const logoutRouter = require('./public/logout'); // Подключаем файл с обработчиком выхода
+const addToyToCart = require('./public/addToyToCart'); //Подключаем файл с обработчиком покупок игрушек
+const addClothingToCart = require('./public/addClothingToCart'); //Подключаем файл с обработчиком покупок одежды
+const addFeedToCart = require('./public/addFeedToCart'); //Подключаем файл с обработчиком покупок корма
+const addAccessoryToCart = require('./public/addAccessoryToCart'); //Подключаем файл с обработчиком покупок аксессуаров
+const enterRouter = require('./public/Routes/enter'); //Подключаем обработчик страницы авторизации
+const cartRouter = require('./public/Routes/cart'); //Подключаем обработчик страницы корзины
+
+//Маршруты товаров
+const toyRoutes = require('./public/Routes/toys'); 
+const clothingRoutes = require('./public/Routes/clothing'); 
+const feedRoutes = require('./public/Routes/feed'); 
+const accessoryRoutes = require('./public/Routes/accessory'); 
+const shopRoutes = require('./public/Routes/shop'); 
 
 const app = express();
 const port = 3000;
@@ -54,10 +68,28 @@ function handleDisconnect() {
   global.db = connection;
 }
 
+app.use(express.urlencoded({extended: true}));
+
 app.use(parser); // Используем настройки парсера из parser.js
 app.use(registerRouter); // Используем маршрут для обработки регистрации
 app.use(loginRouter); //Используем маршрут для обработки авторизации
 app.use(profileRouter); // Используем маршрут для обработки профиля
+app.use(logoutRouter); //Используем маршрут для обработки выхода
+app.use('/enter', enterRouter); //Используем обработчик страницы входа
+app.use('/cart', cartRouter); //Используем обработчик страницы корзина
+
+//Использование маршрутов товаров
+app.use('/toys', toyRoutes); 
+app.use('/clothing', clothingRoutes); 
+app.use('/feed', feedRoutes); 
+app.use('/accessory', accessoryRoutes);
+app.use('/shop', shopRoutes);
+
+//Использование покупок товаров
+app.use('/', addToyToCart);
+app.use('/', addClothingToCart);
+app.use('/', addFeedToCart);
+app.use('/', addAccessoryToCart);
 
 // Запускаем функцию обработки подключения
 handleDisconnect();

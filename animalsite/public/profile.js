@@ -7,7 +7,7 @@ function isAuthenticated(req, res, next) {
   if (req.session && req.session.user) {
     return next();
   }
-  res.status(401).send('Вы должны войти в систему');
+  res.status(401).sendFile(__dirname + '/Вход-или-Регистрация.html');
 }
 
 // Использование функции isAuthenticated в маршруте

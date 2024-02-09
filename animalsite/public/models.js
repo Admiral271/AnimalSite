@@ -88,6 +88,7 @@ const Admin = sequelize.define('Admin', {
 }, {  
 });
 
+//Модель игрушки
 const Toy = sequelize.define('Toy', {
   name: {
     type: DataTypes.STRING,
@@ -256,12 +257,82 @@ const Accessory = sequelize.define('Accessory', {
   indexes: [] // Опция для предотвращения автоматического добавления индексов
 });
 
-User.sync({ alter: true });
-Admin.sync({ alter: true });
 
-Toy.sync({ alter: true });
-Clothing.sync({ alter: true });
-Feed.sync({ alter: true });
-Accessory.sync({ alter: true });
+// Создадим модель для промежуточной таблицы UserToy
+const UserToy = sequelize.define('UserToy', {
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  toyId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
+});
 
-module.exports = { sequelize, User, Admin, Toy, Clothing, Feed, Accessory };
+// Определим связи многие ко многим между User и Toy с явным указанием полей userId и toyId
+User.belongsToMany(Toy, { through: UserToy, foreignKey: 'userId' });
+Toy.belongsToMany(User, { through: UserToy, foreignKey: 'toyId' });
+
+// Создадим модель для промежуточной таблицы UserClothing
+const UserClothing = sequelize.define('UserClothing', {
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  clothingId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
+});
+
+// Определим связи многие ко многим между User и Clothing через UserClothing
+User.belongsToMany(Clothing, { through: UserClothing, foreignKey: 'userId' });
+Clothing.belongsToMany(User, { through: UserClothing, foreignKey: 'clothingId' });
+
+// Создадим модель для промежуточной таблицы UserFeed
+const UserFeed = sequelize.define('UserFeed', {
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  feedId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
+});
+
+// Определим связи многие ко многим между User и Feed через UserFeed
+User.belongsToMany(Feed, { through: UserFeed, foreignKey: 'userId' });
+Feed.belongsToMany(User, { through: UserFeed, foreignKey: 'feedId' });
+
+// Создадим модель для промежуточной таблицы UserToy
+const UserAccessory = sequelize.define('UserAccessory', {
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  accessoryId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
+});
+
+// Определим связи многие ко многим между User и Accessory через UserAccessory
+User.belongsToMany(Accessory, { through: UserAccessory, foreignKey: 'userId' });
+Accessory.belongsToMany(User, { through: UserAccessory, foreignKey: 'accessoryId' });
+
+UserToy.sync({ alter: false });
+UserClothing.sync({ alter: false });
+UserFeed.sync({ alter: false });
+UserAccessory.sync({ alter: false });
+
+User.sync({ alter: false });
+Admin.sync({ alter: false });
+
+Toy.sync({ alter: false });
+Clothing.sync({ alter: false });
+Feed.sync({ alter: false });
+Accessory.sync({ alter: false });
+
+module.exports = { sequelize, User, Admin, Toy, Clothing, Feed, Accessory, UserToy, UserClothing, UserFeed, UserAccessory };

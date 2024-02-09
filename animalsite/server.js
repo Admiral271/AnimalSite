@@ -15,6 +15,7 @@ const addFeedToCart = require('./public/addFeedToCart'); //Подключаем 
 const addAccessoryToCart = require('./public/addAccessoryToCart'); //Подключаем файл с обработчиком покупок аксессуаров
 const enterRouter = require('./public/Routes/enter'); //Подключаем обработчик страницы авторизации
 const cartRouter = require('./public/Routes/cart'); //Подключаем обработчик страницы корзины
+const removeItemRouter = require('./public/removeItem'); //Подключаем обработчик удаления товара из корзины
 
 //Маршруты товаров
 const toyRoutes = require('./public/Routes/toys'); 
@@ -77,6 +78,7 @@ app.use(profileRouter); // Используем маршрут для обраб
 app.use(logoutRouter); //Используем маршрут для обработки выхода
 app.use('/enter', enterRouter); //Используем обработчик страницы входа
 app.use('/cart', cartRouter); //Используем обработчик страницы корзина
+app.use(removeItemRouter); //Используем обработчик удаления товара из корзины
 
 //Использование маршрутов товаров
 app.use('/toys', toyRoutes); 
